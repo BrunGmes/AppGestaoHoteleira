@@ -2,9 +2,7 @@
 
 ## Introdução
 
-Este projeto consiste no desenvolvimento de uma aplicação de consola em Java destinada à gestão básica de um hotel. A aplicação permite consultar quartos, gerir hóspedes e administrar reservas, assegurando a persistência dos dados através de ficheiros CSV. O sistema foi desenvolvido no âmbito da unidade curricular Fundamentos da Programação, integrada na Licenciatura em Engenharia Informática – EaD da Universidade Europeia, com o objetivo de consolidar conceitos fundamentais da programação em Java.
-
-Ao longo do desenvolvimento, procurou‑se aplicar uma abordagem estruturada e modular, recorrendo exclusivamente a classes simples e arrays de tamanho fixo, conforme definido nos requisitos da unidade curricular. O projeto privilegia a clareza do código, a validação rigorosa de dados e a separação entre modelos de dados, lógica de negócio, persistência e interação com o utilizador.
+Este projeto consiste no desenvolvimento de uma aplicação de consola em Java destinada à gestão básica de um hotel. A aplicação permite consultar quartos, gerir hóspedes e administrar reservas, assegurando a persistência dos dados através de ficheiros CSV. O sistema foi desenvolvido no âmbito da uniadade curricular Fundamentos da Programação, integrada na Licenciatura em **Engenharia Informática – EaD da Universidade Europeia**, com o objetivo de consolidar conceitos **fundamentais da programação em Java**.
 
 ## Enquadramento e Funcionamento do Sistema
 
@@ -14,31 +12,74 @@ Após o carregamento dos dados, o sistema procede à atualização do estado de 
 
 ## Organização do Projeto
 
-O projeto encontra‑se organizado de forma a refletir uma separação clara de responsabilidades. As classes Quarto, Hospede e Reserva representam os modelos de dados fundamentais do sistema. A classe GestorHotel centraliza a lógica de negócio, sendo responsável pela implementação das operações de criação, consulta, edição e cancelamento, bem como pela aplicação das regras de validação. A classe GestorDados assegura a leitura e escrita dos ficheiros CSV, enquanto a classe SistemaHotel funciona como ponto de entrada da aplicação e gere toda a interação com o utilizador através de menus em consola.
+O projeto segue uma organização modular, com uma separação clara de responsabilidades:
 
-Os ficheiros CSV utilizados seguem um formato simples e consistente, permitindo uma leitura e escrita diretas sem recurso a bibliotecas externas. Esta abordagem reforça o objetivo pedagógico do projeto, centrado no domínio das estruturas básicas da linguagem Java.
+ - Quarto, Hospede e Reserva
+    Classes que representam os modelos de dados do sistema.
+
+ - GestorHotel
+    Classe responsável pela lógica de negócio, incluindo criação, consulta, edição e cancelamento de dados, bem como pela aplicação das regras de validação.
+
+- GestorDados
+    Responsável pela leitura e escrita dos ficheiros CSV.
+
+ - SistemaHotel
+    Classe principal da aplicação, contendo o método main e gerindo toda a interação com o utilizador através de menus em consola.
+
+Os ficheiros CSV seguem um formato simples, permitindo a leitura e escrita direta, sem dependências externas.
 
 ## Funcionalidades Disponibilizadas
 
-O sistema permite a consulta detalhada dos quartos existentes, possibilitando ao utilizador visualizar todos os quartos, identificar quais se encontram livres ou ocupados e consultar um quarto específico, incluindo as respetivas reservas associadas.
+- Gestão de Quartos
+    - Listagem de todos os quartos
+    - Consulta de quartos livres e ocupados
+    - Consulta detalhada de um quarto específico, incluindo reservas associadas
 
-Relativamente à gestão de hóspedes, a aplicação permite listar todos os hóspedes registados, procurar um hóspede através do seu documento de identificação, adicionar novos registos e editar informações existentes, garantindo sempre a unicidade do documento.
+- Gestão de Hóspedes
+    - Listagem de hóspedes registados
+    - Pesquisa de hóspede por documento de identificação
+    - Adição de novos hóspedes
+    - Edição de dados de hóspedes existentes
+    - Garantia de unicidade do documento de identificação
 
-No que diz respeito às reservas, o sistema possibilita a criação de novas reservas através da seleção automática de um quarto adequado, tendo em conta o número de hóspedes e a disponibilidade. É igualmente possível listar reservas, consultá‑las por quarto ou por hóspede, editar os dados de uma reserva existente ou proceder ao seu cancelamento.
+- Gestão de Reservas
+    - Criação de novas reservas com atribuição automática de quarto disponível
+    - Listagem de todas as reservas
+    - Consulta de reservas por quarto ou por hóspede
+    - Edição de reservas existentes
+    - Cancelamento de reservas
 
-## Regras de Negócio e Validações
+## Instruções para Iniciar o Projeto
 
-A aplicação aplica um conjunto de regras de negócio essenciais ao correto funcionamento do sistema. O número de hóspedes associado a uma reserva deve ser compatível com a capacidade do quarto atribuído. As datas das reservas devem obedecer ao formato YYYY‑MM‑DD e a data de início não pode ser posterior à data de fim. Não são permitidas reservas ativas que se sobreponham no mesmo quarto.
+### Pré-requisitos
 
-Adicionalmente, o sistema valida a existência dos identificadores utilizados, impede a duplicação de documentos de hóspedes e trata situações de erro comuns, como formatos inválidos ou tentativas de ultrapassar os limites definidos para os arrays.
+- Java JDK 8 ou superior instalado no sistema ([Download do Java](https://www.oracle.com/java/technologies/javase-downloads.html))
+- Editor de texto ou IDE (opcional, recomendado: VS Code, IntelliJ IDEA, Eclipse)
 
-## Persistência e Gestão de Dados
+### Passos para Compilar e Executar
 
-A persistência dos dados é assegurada exclusivamente através de ficheiros CSV. Os identificadores de hóspedes e reservas são gerados automaticamente de forma incremental, com base nos dados existentes. O estado de ocupação dos quartos é calculado dinamicamente, em função das reservas ativas e da data corrente, não sendo armazenado diretamente nos ficheiros.
+1. **Clone ou extraia o projeto para uma pasta local.**
+2. **Abra o terminal e navegue até a pasta do projeto.**
+	- Exemplo no Windows:
+	  ```sh
+	  cd caminho\..\AppGestaoHoteleira
+	  ```
+	- Exemplo no Linux/macOS:
+	  ```sh
+	  cd /caminho/../AppGestaoHoteleira
+	  ```
+3. **Compile todos os arquivos Java:**
+	```sh
+	javac *.java
+	```
+4. **Execute a aplicação:**
+	```sh
+	java SistemaHotel
+	```
 
-## Compilação e Execução
-
-A aplicação pode ser compilada através do comando javac *.java, executado na diretoria do projeto. A execução é realizada com o comando java SistemaHotel. O sistema é compatível com ambientes Windows, Linux e macOS, desde que esteja instalada uma versão do Java igual ou superior à versão 8.
+### Observações
+ - Os ficheiros CSV devem estar na mesma pasta do projeto
+ - A aplicação é compatível com Windows, Linux e macOS
 
 ## Contexto Académico
 
