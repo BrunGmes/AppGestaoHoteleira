@@ -216,16 +216,22 @@ public class GestorHotel {
         System.out.println("Capacidade máxima de reservas atingida!");
     }
 
-    public void listarTodasReservas() {
-        System.out.println("\n===== TODAS AS RESERVAS =====");
+    public boolean verificaReservasAtivas() {
         boolean encontrou = false;
         for (Reserva r : reservas) {
             if (r != null && r.isAtiva()) {
-                System.out.println(r);
                 encontrou = true;
             }
         }
-        if (!encontrou) System.out.println("Nenhuma reserva ativa.");
+        return encontrou;
+    }
+
+    public void listarTodasReservas() {
+        System.out.println("\n===== TODAS AS RESERVAS =====");
+        for (Reserva r : reservas) {
+            if (r != null )
+                System.out.println(r);
+        }
     }
 
     public void listarReservasPorQuarto(int idQuarto) {

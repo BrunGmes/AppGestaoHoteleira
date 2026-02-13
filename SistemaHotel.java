@@ -183,21 +183,33 @@ public class SistemaHotel {
                     break;
                 }
                 case 5: {
-                    int idReserva = lerInteiro("ID da reserva: ");
-                    System.out.println("Deixe vazio para não alterar");
-                    String numStr = lerString("Novo número de hóspedes: ");
-                    Integer novoNum = numStr.isEmpty() ? null : Integer.parseInt(numStr);
-                    
-                    String dataInicioStr = lerString("Nova data de início: ");
-                    LocalDate novaDataInicio = dataInicioStr.isEmpty() ? null : LocalDate.parse(dataInicioStr, DATE_FORMATTER);
-                    
-                    String dataFimStr = lerString("Nova data de fim: ");
-                    LocalDate novaDataFim = dataFimStr.isEmpty() ? null : LocalDate.parse(dataFimStr, DATE_FORMATTER);
-                    
-                    try {
-                        gestor.editarReserva(idReserva, novoNum, novaDataInicio, novaDataFim);
-                    } catch (Exception e) {
-                        System.out.println("Erro ao editar: " + e.getMessage());
+                    if (gestor.verificaReservasAtivas()) {
+                        int idReserva = lerInteiro("ID da reserva: ");
+                        System.out.println("Deixe vazio para não alterar");
+                        String numStr = lerString("Novo número de hóspedes: ");
+                        Integer novoNum = numStr.isEmpty() ? null : Integer.parseInt(numStr);
+
+                        LocalDate novaDataInicio = LocalDate.now();
+                        LocalDate novaDataFim = LocalDate.now();
+
+                        try {
+                            String dataInicioStr = lerString("Nova data de início: ");
+                            novaDataInicio = dataInicioStr.isEmpty() ? null : LocalDate.parse(dataInicioStr, DATE_FORMATTER);
+                            String dataFimStr = lerString("Nova data de fim: ");
+                            novaDataFim = dataFimStr.isEmpty() ? null : LocalDate.parse(dataFimStr, DATE_FORMATTER);
+
+                            try {
+                                gestor.editarReserva(idReserva, novoNum, novaDataInicio, novaDataFim);
+                            } catch (Exception e) {
+                                System.out.println("Erro ao editar: " + e.getMessage());
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Datas erradas! Pf. Corrija");
+                        }
+                    }
+                    else
+                    {
+                        System.out.println("Não existem reservas Ativas!");
                     }
                     break;
                 }
